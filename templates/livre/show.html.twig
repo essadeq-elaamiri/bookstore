@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livre{% endblock %}
+
+{% block body %}
+    <h1 class="mt-4 mb-5">{{ livre.titre }}</h1>
+
+
+
+    <div class="row">
+        <div class="col-md-5">
+            <img src="..."
+                 srcset="https://covers.openlibrary.org/b/isbn/{{ livre.isbn }}-L.jpg ,
+                                        https://via.placeholder.com/150/150"
+                 class="" alt="cover"
+
+            >
+        </div>
+        <div class="col-md-7">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ livre.id }}</td>
+                </tr>
+                <tr>
+                    <th>Isbn</th>
+                    <td>{{ livre.isbn }}</td>
+                </tr>
+                <tr>
+                    <th>Titre</th>
+                    <td>{{ livre.titre }}</td>
+                </tr>
+                <tr>
+                    <th>Nombre_pages</th>
+                    <td>{{ livre.nombrePages }}</td>
+                </tr>
+                <tr>
+                    <th>Date_de_parution</th>
+                    <td>{{ livre.dateDeParution ? livre.dateDeParution|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Note</th>
+                    <td>{{ livre.note }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ livre.description }}</td>
+                </tr>
+                <tr>
+                    <th>Auteurs</th>
+                    <td>
+                        {% for auteur in livre.auteurs %}
+                           <a href="{{ path('auteur_show', {'id':auteur.id}) }}" class="badge bg-secondary">{{ auteur.nomPrenom }}</a>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Genres</th>
+                    <td>
+                        {% for genre in livre.genres %}
+                            <a href="{{ path('genre_show', {'id':genre.id}) }}" class="badge rounded-pill bg-info text-dark">{{ genre.nom }}</a>
+                        {% endfor %}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <a href="{{ path('livre_index') }}" class="btn btn-primary mt-3 mb-3 btn-sm"> <i class="fas fa-arrow-alt-circle-left"></i> back to list</a>
+
+    {#% if app.user and 'ROLE_ADMIN' in app.user.roles %#}
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('livre_edit', {'id': livre.id}) }}" class="btn btn-secondary mt-3 mb-3 btn-sm"> <i class="fas fa-edit"></i> edit</a>
+
+    {{ include('livre/_delete_form.html.twig') }}
+    {% endif %}
+{% endblock %}

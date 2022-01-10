@@ -1,0 +1,89 @@
+body{
+    background-color: #E9EBEE;
+    /*background-image: url('../img/library.jpg');*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    /*
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    */
+
+
+}
+
+.main{
+    margin-top: 30px;
+}
+
+.welcome-header{
+    border: 1px solid #ced4da;
+    background-color: #f8f9fa;
+    /*
+    -webkit-box-shadow: 1px 1px 4px -2px #525252;
+    box-shadow: 1px 1px 4px -2px #525252;
+
+     */
+    margin-top: 20px;
+    padding: 30px;
+}
+
+/* ced4da */
+.filters{
+    border: 1px solid #ced4da;
+    background-color: #F8F9FA;
+    /*
+    -webkit-box-shadow: 1px 1px 4px -2px #525252;
+    box-shadow: 1px 1px 4px -2px #525252;
+
+     */
+    height: max-content;
+    padding: 30px 17px 40px 17px;
+}
+
+.nombre-pages{
+    display: inline-block;
+    margin-left: 30px;
+}
+
+.book{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 0;
+    border: 1px solid #ced4da;
+    background-color: #F8F9FA;
+    /*
+    -webkit-box-shadow: 1px 1px 4px -2px #525252;
+    box-shadow: 1px 1px 4px -2px #525252;
+
+     */
+}
+
+.book:hover{
+    -webkit-box-shadow: 1px 1px 4px -2px #525252;
+    box-shadow: 1px 1px 4px -2px #525252;
+}
+
+.book .col-3{
+    padding-left: 0;
+}
+.book .col-9 h4{
+    font-size: 20px;
+    margin-top: 5px;
+
+}
+
+.book .row{
+    margin-bottom: 13px;
+}
+
+.login{
+    border: 1px solid #ced4da;
+    background-color: #F8F9FA;
+    /*
+    -webkit-box-shadow: 1px 1px 4px -2px #525252;
+    box-shadow: 1px 1px 4px -2px #525252;
+
+     */
+}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Genre index{% endblock %}
+
+{% block body %}
+    <h1>Genre index</h1>
+    {#% if app.user and 'ROLE_ADMIN' in app.user.roles %#}
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('genre_new') }}" class="btn btn-primary mt-3 mb-3 btn-sm"><i class="fas fa-plus-circle"></i> Create new</a>
+    {% endif %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for genre in genres %}
+            <tr>
+                <td>{{ genre.id }}</td>
+                <td>{{ genre.nom }}</td>
+                <td>
+                    <a href="{{ path('genre_show', {'id': genre.id}) }}" class="btn btn-dark text-light btn-sm"><i class="fas fa-eye"></i></a>
+                    {#% if app.user and 'ROLE_ADMIN' in app.user.roles %#}
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('genre_edit', {'id': genre.id}) }}" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i></a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

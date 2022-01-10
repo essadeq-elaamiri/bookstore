@@ -1,0 +1,144 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}" />
+{% endblock %}
+
+{% block body %}
+
+
+
+  <div class="">
+      <div class="row text-center text-capitalize welcome-header">
+          <h1>Welcome to BookStore</h1>
+          <p class="lead">{{ livres | length }} books available</p>
+          {% if not app.user %}
+              <div class="alert alert-info" role="alert">
+                  <a href="{{ path('app_login') }}">Login</a>, or <a href="{{ path('app_register') }}">create an account</a> to have more options.
+              </div>
+          {% endif %}
+      </div>
+      <div class="row main">
+          <div class="col-4 filters">
+              <h2 class="mt-2">Filters</h2>
+              <p>Search with a key word</p>
+              <form class="d-flex mt-4" method="post">
+                  <div class="input-group mb-3">
+                      <input name="keywords" type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                      <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                          <i class="fas fa-search"></i>
+                      </button>
+                  </div>
+              </form>
+              <hr>
+              <p>Get the books published between two dates</p>
+              <form class="d-flex mt-4" method="post">
+                  <div class="input-group mb-3">
+                      <input  name="date1" type="date" class="form-control" placeholder="Date from" aria-label="Date from">
+                      <input  name="date2" type="date" class="form-control" placeholder="Date to" aria-label="Date to" aria-describedby="button-addon2">
+                      <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                          <i class="fas fa-filter"></i>
+                      </button>
+                  </div>
+              </form>
+              <hr>
+              <p>Get the books of an author</p>
+                  <form class="d-flex mt-4" method="post">
+                      <div class="input-group">
+                          <select name="author" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                              {% for auth in auteurs %}
+                                  <option value="{{ auth.id }}">{{ auth.nomPrenom }}</option>
+                              {% endfor %}
+                          </select>
+                          <button class="btn btn-outline-secondary" type="submit">
+                              <i class="fas fa-filter"></i>
+                          </button>
+                      </div>
+                  </form>
+              <hr>
+              <p>Get the books that belongs to a category</p>
+
+              <form class="d-flex mt-4" method="post">
+                  <div class="input-group">
+                      <select name="category" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                          {% for cate in genres %}
+                              <option value="{{ cate.id }}">{{ cate.nom }}</option>
+                          {% endfor %}
+                      </select>
+                      <button class="btn btn-outline-secondary" type="submit">
+                          <i class="fas fa-filter"></i>
+                      </button>
+                  </div>
+              </form>
+              <hr>
+
+              <p>Get the books by their rating</p>
+              <form class="d-flex mt-4" method="post">
+                  <div class="input-group">
+                      <select name="note" class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                          {% for i in 0..20 %}
+                              <option value="{{ i }}">{{ i }} / 20</option>
+                          {% endfor %}
+                      </select>
+                      <button class="btn btn-outline-secondary" type="submit">
+                          <i class="fas fa-filter"></i>
+                      </button>
+                  </div>
+              </form>
+
+          </div>
+          <div class="col-8">
+              <section class="books">
+                  <div class="container">
+                      <div class="">
+                          {% for livre in livres %}
+                              <div class="row book mb-3">
+                                  <div class="col-3">
+                                      <img src="..."
+                                           srcset="https://covers.openlibrary.org/b/isbn/{{ livre.isbn }}-M.jpg ,
+                                            https://via.placeholder.com/150/150"
+                                           class="" alt="Could not load cover"
+                                           style="width: 120px; height:auto;"
+                                      >
+                                  </div>
+                                  <div class="col-9">
+                                      <h4>{{ livre.titre }} <span class="badge rounded-pill bg-warning text-dark">
+                                                  {{ livre.note ? livre.note : '_' }}/20
+                                              </span>
+                                      </h4>
+                                      By:
+                                      {% for auteur in livre.auteurs %}
+                                        <span> {{ auteur }}</span>,
+                                      {% endfor %}
+                                      <p>{{ livre.dateDeParution | date('Y-m-d') }}<span class="nombre-pages">{{ livre.nombrePages }} pages </span></p>
+
+
+                                      <div class="row">
+                                          <div class="col-9">
+                                              {% for category in livre.genres %}
+                                                  <span class="badge rounded-pill bg-secondary">
+                                                {{ category ? category : 'genre non definie' }}
+                                              </span>
+                                              {% endfor %}
+                                          </div>
+                                          <div class="col-3">
+                                              <a href="{{ path('livre_show', {'id': livre.id}) }}" class="btn btn-outline-dark btn-sm">Show more</a>
+                                          </div>
+                                      </div>
+
+
+                                  </div>
+                              </div>
+
+                          {% endfor %}
+                      </div>
+                  </div>
+              </section>
+          </div>
+      </div>
+  </div>
+{% endblock %}

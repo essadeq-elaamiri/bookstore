@@ -8,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+
 
 class AuteurType extends AbstractType
 {
@@ -16,7 +18,7 @@ class AuteurType extends AbstractType
         $builder
             ->add('nom_prenom')
             ->add('sexe')
-            ->add('date_de_naissance')
+            ->add('date_de_naissance',DateType::class,['widget'=>'single_text'])
             ->add('nationalite')
             ->add('livres')
         ;

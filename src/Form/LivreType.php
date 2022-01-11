@@ -6,6 +6,8 @@ use App\Entity\Livre;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+
 
 class LivreType extends AbstractType
 {
@@ -15,7 +17,7 @@ class LivreType extends AbstractType
             ->add('isbn')
             ->add('titre')
             ->add('nombre_pages')
-            ->add('date_de_parution')
+            ->add('date_de_parution',DateTimeType::class,['widget'=>'single_text'])
             ->add('note')
             ->add('description')
             ->add('auteurs')
